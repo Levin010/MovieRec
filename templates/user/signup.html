@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="card-wrapper">
+    <!-- Signup Card -->
+    <div class="card">
+      <h1 class="center">Create an Account</h1>
+      <form name="signup_form" method="POST">
+        {{ signup_form.hidden_tag() }}  <!-- CSRF Token -->
+
+        <label for="username">Username</label>
+        {{ signup_form.username(class="field", placeholder="Pick a username...") }}
+
+        <label for="email">Email</label>
+        {{ signup_form.email(class="field", placeholder="Your email...") }}
+
+        <label for="password">Password</label>
+        <div class="password-container">
+          {{ signup_form.password(class="field password-input", placeholder="Enter your password...", id="signup-password") }}
+          <button type="button" class="toggle-password" onclick="togglePassword('signup-password', 'signup-toggle')">Show</button>
+        </div>
+
+        <label for="confirm_password">Confirm Password</label>
+        <div class="password-container">
+          {{ signup_form.confirm_password(class="field password-input", placeholder="Confirm password...", id="signup-confirm-password") }}
+          <button type="button" class="toggle-password" onclick="togglePassword('signup-confirm-password', 'signup-confirm-toggle')">Show</button>
+        </div>
+
+        <p class="error error--hidden"></p>
+
+        <input type="submit" value="Sign up" class="btn">
+      </form>
+    </div>
+
+  </div>
+{% endblock %}

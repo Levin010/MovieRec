@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="card-wrapper">
+    
+    <!-- Login Card -->
+    <div class="card">
+      <h1 class="center">Login</h1>
+      <form name="login_form" method="POST">
+        {{ login_form.hidden_tag() }}  <!-- CSRF Token -->
+
+        <label for="email">Email</label>
+        {{ login_form.email(class="field", placeholder="Your email...") }}
+
+        <label for="password">Password</label>
+        <div class="password-container">
+          {{ login_form.password(class="field password-input", placeholder="Enter your password...", id="login-password") }}
+          <button type="button" class="toggle-password" onclick="togglePassword('login-password', 'login-toggle')">Show</button>
+        </div>
+
+        <a href="{{ url_for('user.request_password_reset') }}" class="forgot-password">Forgot Password?</a>
+
+        <p class="error error--hidden"></p>
+
+        <input type="submit" value="Log In" class="btn">
+      </form>
+    </div>
+  </div>
+{% endblock %}

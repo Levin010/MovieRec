@@ -139,6 +139,63 @@ label {
   display: none;
 }
 
+.password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input {
+  width: 100%;
+  padding-right: 60px; /* Space for Show/Hide button */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  bottom: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.toggle-password:hover {
+  color: #0056b3;
+}
+
+.forgot-password {
+  display: block; 
+  text-align: right; 
+  margin-top: 10px; 
+  font-size: 20px; 
+  color: #007bff; 
+  text-decoration: none; 
+  transition: color 0.3s ease-in-out; 
+}
+
+.forgot-password:hover {
+  color: #0056b3; 
+  text-decoration: underline; 
+}
+
+.back-to-login {
+  display: block; 
+  text-align: left; 
+  margin-top: 10px; 
+  font-size: 20px; 
+  color: #007bff; 
+  text-decoration: none; 
+  transition: color 0.3s ease-in-out; 
+}
+
+.back-to-login:hover {
+  color: #0056b3; 
+  text-decoration: underline; 
+}
+
 /* Buttons */
 .btn {
   margin: 0 0 24px;
@@ -175,4 +232,48 @@ label {
 input[type=submit] {
   margin: 34px auto 24px;
   display: block;
+}
+
+/* Header Styles */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 15px 30px;
+  color: white;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 24px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+nav ul li a:hover {
+  color: #f39c12; /* Highlight color */
+}
+
+/* Main Content */
+main {
+  padding: 20px;
+  text-align: center;
 }

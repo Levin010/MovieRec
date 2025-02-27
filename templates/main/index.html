@@ -1,6 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Home</h1>
-    <p>Welcome to the Movie App!</p>
+    <header>
+        <h1>Movie Rec</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('user.signup') }}">Sign Up</a></li>
+                <li><a href="{{ url_for('user.login') }}">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Home</h2>
+        <p>Welcome to Movie Rec!</p>
+    </main>
 {% endblock %}
