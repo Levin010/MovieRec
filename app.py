@@ -4,8 +4,8 @@ from flask_wtf.csrf import CSRFProtect
 from .extensions import mongo, init_db, mail
 import os
 from .config import Config
-from .blueprints.movieapp.user.routes import user_bp
-from .blueprints.movieapp.main.routes import main_bp
+from .src.app.user.routes import user_bp
+from .src.app.main.routes import main_bp
 
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
