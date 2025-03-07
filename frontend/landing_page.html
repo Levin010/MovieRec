@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Review and Recommendation Site</title>
+    <!-- <link rel="stylesheet" href="/src/output.css"> -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100..900&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        *,
+        .myFont {
+            font-family: "Raleway", serif;
+
+        }
+
+        .modal{
+        background: linear-gradient(to bottom, rgba(0,0,0,0), #000), linear-gradient(to left, rgba(0,0,0,0), #242121), linear-gradient(to right, rgba(0,0,0,0), #242121), url('Assets/Home_Movie2.webp');
+        }
+        
+
+        .radial-blur {
+            position: absolute;
+            height: 110vh;
+        }
+
+        .radial-blur1::before {
+            content: '';
+            position: absolute;
+            height: 110vh;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent, rgba(0, 0, 0, 1));
+            backdrop-filter: blur(3px);
+            z-index: -1;
+            filter: brightness(0.75);
+        }
+
+        .segoe {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .dark-overlay {
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.02));
+
+        }
+
+        .dark-overlay2 {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.5));
+
+        }
+
+        .dark-overlay3 {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.1));
+
+        }
+
+        .gray-overlay {
+            background: linear-gradient(to top, rgba(56, 55, 56, 0.9), rgba(0, 0, 0, 0.4));
+
+        }
+        
+
+        .--fa-p-color {
+            color: #63E6BE;
+        }
+
+        .--fa-s-color {
+            color: #63E6BE;
+        }
+        
+        
+        @media screen and (max-width: 640px) {
+            
+            
+            .radial-blur::before {
+                /* background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('Assets/Home_Movie2.webp') */
+                content: '';
+                position: absolute;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: radial-gradient(circle, transparent, rgba(0, 0, 0, 0.4));
+                backdrop-filter: blur(3px);
+                z-index: -1;
+                filter: brightness(0.75);
+            }
+
+        }
+
+        .movie-card:hover .movie-details {
+            display:flex;
+        }
+
+        .intro-overlay{
+        background: linear-gradient(to top, rgba(0,0,0,0), #000), linear-gradient(to left, rgba(58, 54, 54, 0.8), #242121), linear-gradient(to right, rgba(58, 54, 54, 0.8), #242121), url('Assets/Home_Movie2.webp');
+
+        }
+
+    </style>
+</head>
+
+
+
+
+
+<body class="">
+
+    <nav class=" top-0 left-0 w-full h-16 bg-black/80 py-4 px-4 z-50 lg:px-10 justify-around items-center">
+        <div class="flex justify-around items-center gap-[20px] ">
+            <!-- Logo -->
+            <div><a href="" class="text-white text-lg font-light">Movie Rec</a></div>
+
+            <!-- Desktop Menu - Hidden on medium and small screens -->
+            <div class="hidden lg:flex space-x-1">
+                <a href=""
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">My
+                    Reviews</a>
+
+                <a href=""
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2"></a>
+                <a href=""
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">
+                </a>
+
+            </div>
+
+            <a href=""
+                class="hidden lg:flex py-1 px-2 text-white text-md font-light tracking-widest transition-colors duration-300 hover:bg-white hover:text-black hover:border-transparent">
+                Review Movie
+            </a>
+
+            <i class="fa fa-search" style="color: #ffffff;" id="userIcon" onclick="toggleSearch()"></i>
+            <div class="bg-black rounded w-[30px] h-[30px] rounded-full flex justify-around items-center">
+                <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i>
+            </div>
+
+
+            <!-- Hamburger Menu - Visible only on medium and small screens -->
+            <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
+                <i class="fas fa-bars" id="menuIcon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-80 z-40 hidden">
+        <div class="flex flex-col relative items-start justify-start no-scroll h-full space-y-4 px-10 mt-20">
+            <a href="{{ url_for('home') }}" class="text-white text-md font-light  border-b w-full pb-2">My Reviews</a>
+            <a href="{{ url_for('home') }}#about" class="text-white text-md font-light border-b w-full pb-2"></a>
+            <a href="{{ url_for('services') }}" class="text-white text-md font border-b w-full pb-2"></a>
+            <a href="{{ url_for('howwework') }}" class="text-white text-md font-light"></a>
+            <a href="{{ url_for('booking') }}"
+                class=" w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
+                Review Movie
+            </a>
+            <a href="{{ url_for('booking') }}"
+                class=" w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
+                <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i> My Profile
+
+            </a>
+            <div class="loginNsignup w-full flex justify-center items-center gap-3">
+                <a href=""
+                    class="w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
+                    Sign Up</a>
+                <a href=""
+                    class="w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
+                    Login</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="search-box"
+    class="absolute hidden top-0 left-[10%] search-box h-full lg:h-1/3 w-full lg:w-[80%] bg-slate-900 z-50 h-full flex justify-center lg:content-end ">
+         <i id="closeBox" class="absolute right-4 top-4 bx bx-x text-white text-4xl" onclick="toggleSearch()"></i>
+        <div class="search pt-20 w-full lg:w-[60%] rounded  flex justify-center space-x-2 ">
+            <input type="search" name="search" id="search" placeholder="  Search a movie, reviews, users..." class="w-5/6 lg:w-[80%] h-10 rounded bg-white">
+            <i class="fas fa-search text-red-800 z-50 text-2xl pt-2  "></i>
+        </div>
+    </div>
+        
+    <div class="relative flex flex-col w-full h-full">
+       
+        <div id="myModal" class="modal w-full h-[35vh] md:h-[50vh] flex justify-center">
+            
+            <div class="main-modal relative flex w-[80%] h-full justify-center align-center">
+                <div class="bg-black-80 flex justify-center align-center text-white modal-content  ">
+                    <div class="flex justify-center items-center w-full ">
+                        <div id="lbutton" class="hidden absolute flex items-center justify-center z-1 left-3 bg-black/50 rounded-full w-[40px] h-[40px] md:left-[4.5rem] lg:left-36 ">
+                            <i class="fas fa-chevron-left z-2 " onclick="changeSlide(-1)"></i>
+                        </div>
+                        <div class=" w-50%">
+                        <img id="modalImage" class="relative w-inherit aspect-16:9" src="Assets/Home_Movie1.jpeg" alt="Image not found" />
+                        </div>
+                        <div id="rbutton" class=" hidden absolute flex items-center justify-center z-1 right-4 bg-black/50 rounded-full w-[40px] h-[40px] md:right-[4.5rem] lg:right-36 ">
+                            <i class="fas fa-chevron-right z-50 " onclick="changeSlide(1)"></i>
+                        </div>
+                        
+                        <!-- Image count and counter -->
+                        <div id="imageCount" class="hidden absolute flex z-50 bottom-8 image-count text-md md:text-2xl lg:text-3xl text-white ">1</div>
+                        <div id="imageCounter" class="hidden lg:block image-counter lg:justify-self-start text-transparent">1 / 3</div>
+                        
+                        <!-- Progress Dots -->
+                        <div id="progressDots" class="absolute hidden md:grid bottom-4  grid-cols-3 justify-center w-1/10 gap-[2px]">
+                            <img id="dot1" src="Assets/Home_Movie1.jpeg" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover" onclick="jumpToSlide(0)"></img>
+                            <img id="dot2" src="Assets/Home_Movie2.webp" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover" onclick="jumpToSlide(1)"></img>
+                            <img id="dot3" src="Assets/Home_Movie3.jpeg" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover    " onclick="jumpToSlide(2)"></img>
+                        </div>
+                        <div id="progressDots" class="absolute md:hidden bottom-4 flex flex-cols justify-center w-full space-x-2">
+                            <div id="dot1" class="dot w-3 h-3 bg-white rounded-full cursor-pointer" onclick="jumpToSlide(0)"></div>
+                            <div id="dot2" class="dot w-3 h-3 bg-white rounded-full cursor-pointer" onclick="jumpToSlide(1)"></div>
+                            <div id="dot3" class="dot w-3 h-3 bg-white rounded-full cursor-pointer" onclick="jumpToSlide(2)"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+<!-- Website Intro section -->
+        <div class="landingText intro-overlay  relative flex flex-col h-full justify-center items-center ">
+
+            <div class="siteName text-[28px] lg:text-7xl font-bold text-white h-24 lg:h-40 content-center"> Welcome to Movie-Rec!</div>
+
+            <div class="about relative flex flex-col justify-center items-center p-2 h-60">
+                <p class="text-white text-[18px] md:text-2xl segoe text-center">Track Movies you've watched</p>
+                <p class="text-white text-[18px] md:text-2xl segoe text-center">Rate and Review Movies you've watched</p>
+                <p class="text-white text-[18px] md:text-2xl segoe text-center">Spread the word on that Movie you like!</p>
+            </div>
+
+            <div class="relative flex flex-col justify-center items-center gap-8 h-60">
+                <p class="text-white text-[18px] segoe text-center "> A Social network of Movie-Lovers. </p>
+                <button class="text-black bg-sky-300 rounded p-3 ">Get Started! It's Free</button>
+
+            </div>
+
+        </div>
+
+<!-- Top Reviewed Movies section -->
+        <div class="just-reviewed relative bg-black/90 p-8">
+            <div class="relative text-white text-xl font-bold  lg:text-3xl pb-4 pl-4 underline decoration-sky-300 decoration-2 underline-offset-10 text-center">Most Reviewed Movies</div>
+            <div class="w-full px-4 grid grid-cols-3 lg:grid-cols-10 gap-4 pb-10">
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie1.jpg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie2.jpg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie1.jpg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie3.jpg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card ">
+                        <img src="Assets/Home_Movie1.jpeg" alt="Image not Found" class="rounded ">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie5.jpeg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie6.jpeg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Movie7.jpg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Home_Movie1.jpeg" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+                <div class=" movie-card w-full">
+                    <div class="card">
+                        <img src="Assets/Home_Movie2.webp" alt="Image not Found" class="rounded">
+                    </div>
+                    <div class="reviews" >
+
+                    </div>
+
+                </div>
+
+                
+            </div>
+
+
+        </div>
+
+
+        <!-- Recent Reviews -->
+        <div class="just-reviewed relative bg-black/90 p-8">
+            <div class="relative text-white text-xl font-bold  lg:text-3xl pb-4 pl-4 underline decoration-sky-300 decoration-2 underline-offset-10 text-center">Recently Reviewed</div>
+            <div class="w-full px-4 grid grid-cols-3 lg:grid-cols-10 gap-4 pb-10">
+                <div class="w-full">
+                    <div class="card">
+                        <img src="Assets/Movie1.jpg" alt="Image not Found" class="rounded">
+                    </div>
+
+                </div>
+                <div class="w-full">
+                    <div class="card">
+                        <img src="Assets/Movie2.jpg" alt="Image not Found" class="rounded">
+                    </div>
+
+                </div>
+                <div class="w-full">
+                    <div class="card">
+                        <img src="Assets/Movie3.jpg" alt="Image not Found" class="rounded">
+                    </div>
+
+                </div>
+                <div class="w-full">
+                    <div class="card">
+                        <img src="Assets/Movie5.jpeg" alt="Image not Found" class="rounded">
+                    </div>
+
+                </div>
+                <div class="w-full">
+                    <div class="card">
+                        <img src="Assets/Movie7.jpg" alt="Image not Found" class="rounded">
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <!-- Your Developers -->
+        <section class="dev-section  relative bg-black/90 w-full h-fit md:mt-0 h-[30vh]">
+            <div class="relative text-center text-white text-4xl underline decoration-sky-300 decoration-2 underline-offset-10  "> Developers</div>
+            <div class="developers-card relative w-full mt-10 flex justify-center ">
+                <div class="inner-card w-full  p-6 flex flex-col justify-around space-y-12 md:grid md:grid-cols-2 md:gap-8 md:justify-items-center">
+    
+                    <div class="dev1 bg-gray-400/90 pb-8 rounded-md  md:w-3/6 h-7/8">
+                        <div class="flex justify-center items-center pt-2">
+                            <img src="Assets/Movie1.jpg" alt="A Photo of Levin Omwenga"
+                                class="rounded-full w-[150px] h-[150px] object-fit">
+                        </div>
+                        <div class="text-center font-semibold text-2xl"> Levin Omwenga</div>
+                        <div class="flex justify-center items-center pb-2">
+                            <p class="w-fit inline italic">Software Engineer</p><span class="mx-[5px]">||</span>
+                            <p class="w-fit inline italic"> ML Enthusiast</p>
+                        </div>
+                        <div class="text-center px-2 md:px-4 ">
+                            <p> Levin is a seasoned Software Engineer Based in Nairobi, with a passion for Data Science and
+                                a new found interest in Machine Learning. He is passionate about Health and Fitness.</p>
+                        </div>
+                        <div class="flex justify-center space-x-4 pt-4 md:pt-8">
+    
+                            <a href="https://linkedin.com/in/levinoyugi"> <i class="fab fa-linkedin text-2xl"
+                                    style="color: #0a66c2;"></i></a>
+                            <a href=""><i class="fab fa-github text-2xl" style="color: #000000;" ></i></a>
+                          
+                        </div>
+                    </div>
+               
+    
+                    <div class="dev2 bg-blue-300/90 rounded pb-8 rounded-md md:w-3/6 h-7/8">
+                        <div class="flex justify-center items-center pt-2">
+                            <img src="Assets/Movie3.jpg" alt="A photo of Rhema Mutethia"
+                                class="rounded-full w-[150px] h-[150px] object-cover">
+                        </div>
+                        <div>
+                            <div class="text-center font-semibold text-2xl"> Rhema Mutethia</div>
+                            <div class="flex justify-center items-center pb-2">
+                                <p class="w-fit inline italic">Software Developer</p><span class="mx-[5px]">||</span>
+                                <p class="w-fit inline italic">Cloud Enthusiast</p>
+                            </div>
+                            <div class="text-center px-2 md:px-4 ">
+                                <p>Rhema is a passionate Software Developer with interest in Cloud Computing and Data
+                                    Science. He loves solving problems, writing code and making music.</p>
+                            </div>
+                            <div class="flex justify-center space-x-4 pt-4">
+    
+                                <a href="https://linkedin.com/in/rhemamutethia"> <i class="fab fa-linkedin text-2xl"
+                                        style="color: #0a66c2;"></i></a>
+                                <a href="https://github.com/rhema254"><i class="fab fa-github text-2xl" style="color: #000000;" ></i></a>
+                                <a href="https://rhemamutethia.software"><i class="fa-sharp fa fa-globe text-2xl"></i></a>
+                              
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <footer class="bg-black w-full p-6 flex flex-cols justify-around">
+        <div class="text-white">
+           <h2 class="text-4xl font-bold" >Movie-Rec</h2>
+           <h4 class="italic">For Movie-Lovers</h4>
+        </div>
+        <div class="text-white">
+            <h4 class="font-bold">Your Account</h4>
+            <h4 class="italic
+            
+            
+            ">Create an Account</h4>
+
+            <h4 class="italic">Review a Movie</h4>
+
+
+         </div>
+         <div class="text-white">
+            <h4 class="font-bold">Report Abuse</h4>
+            <h4 class="">Consult Admin</h4>
+            <h4 class="">Report Problem</h4>
+
+         </div>
+        
+    </footer>
+    <script>
+
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuIcon = document.getElementById('menuIcon');
+
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.classList.remove('fa-bars');
+                menuIcon.classList.add('fa-times');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.classList.remove('fa-times');
+                menuIcon.classList.add('fa-bars');
+            }
+        }
+
+        function toggleSearch(){
+            const searchBox = document.getElementById('search-box');
+
+
+            if(searchBox.classList.contains('hidden')){
+                searchBox.classList.remove('hidden');
+                
+
+            }else{
+                searchBox.classList.add('hidden');
+            }
+
+        }
+        
+        
+
+    </script>
+    <script src="script.js"></script>
+
+</body>
+
+</html>
