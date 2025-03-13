@@ -23,45 +23,44 @@
 
 <body class="bg-gray-300 myFont">
 
-    <nav class="fixed bg top-0 left-0 w-full h-16 bg-black/70 py-4 px-4 z-50 lg:px-10 justify-around items-center">
-        <div class="flex justify-around items-center gap-[20px] ">
-            <!-- Logo -->
-            <div><a href="" class="text-white text-lg font-light">Movie Rec</a></div>
-
-            <!-- Desktop Menu - Hidden on medium and small screens -->
-            <div class="hidden lg:flex space-x-1">
-                <a href=""
-                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">My
-                    Reviews</a>
-
-                <a href=""
-                    class="text-white text-sm lg:tracking-widest  font-light hover:underline underline-offset-8 decoration-2"></a>
-                <a href=""
-                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2"></a>
-                <a href=""
-                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">
-                </a>
+    <div class="navbar sticky top-0 w-full h-12 bg-black">
+        <div class="navbar-container flex items-center px-12 h-full text-white font-sans">
+            <div class="logo-container flex-1">
+                <h1 class="logo text-2xl text-green-500">MovieRec</h1>
             </div>
-
-            <!-- Desktop Appointment Button - Hidden on medium and small screens -->
-            <a href=""
-                class="hidden lg:flex py-1 px-2 text-white text-md font-light tracking-widest transition-colors duration-300 hover:bg-white hover:text-black hover:border-transparent">
-                Review Movie
-            </a>
-
-            <i class="fa fa-search" style="color: #ffffff;" id="userIcon"></i>
-            <div class="bg-black rounded w-[30px] h-[30px] rounded-full flex justify-around items-center">
-                <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i>
+            <div class="menu-container flex-6">
+                <ul class="menu-list flex list-none">
+                    <li class="menu-list-item mr-8 font-bold text-yellow-400">Home</li>
+                    <li class="menu-list-item mr-8">Movies</li>
+                    <li class="menu-list-item mr-8">Series</li>
+                    <li class="menu-list-item mr-8">Popular</li>
+                    <li class="menu-list-item mr-8">Trends</li>
+                </ul>
             </div>
-
-            <!-- Hamburger Menu - Visible only on medium and small screens -->
-            <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
-                <i class="fas fa-bars" id="menuIcon"></i>
-            </button>
+            <div class="profile-container flex-2 flex items-center justify-end ">
+                <img class="profile-picture w-8 h-8 rounded-full object-cover" src="Assets/Home_Movie1.jpeg" alt="">
+                <div class="profile-text-container mx-5 flex items-center cursor-pointer">
+                    <span class="profile-text">Profile</span>
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="toggle w-10 h-5 bg-white rounded-full flex items-center justify-around relative">
+                    <i class="fas fa-moon text-yellow-500"></i>
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <div
+                        class="toggle-ball w-4.5 h-4.5 bg-black absolute right-0 rounded-full cursor-pointer transition-all duration-1000">
+                    </div>
+                </div>
+            </div>
         </div>
-    </nav>
+    </div>
+<!-- 
+    <!-- Hamburger Menu - Visible only on medium and small screens -->
+    <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
+        <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
 
-    <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 z-40 hidden">
+    <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 z-40 lg:hidden">
+        
         <div class="flex flex-col relative items-start justify-start no-scroll h-full space-y-4 px-10 mt-20">
             <a href="{{ url_for('home') }}" class="text-white text-md font-light  border-b w-full pb-2">My Reviews</a>
             <a href="{{ url_for('home') }}#about" class="text-white text-md font-light border-b w-full pb-2"></a>
@@ -80,7 +79,7 @@
     </div>
 
 
-    <div id="myModal" class="modal mt-20 bg-black block w-full h-[40vh] md:h-[60vh] md:mt-[60px] ">
+    <div id="myModal" class="modal mt-0 bg-black block w-full h-[40vh] md:h-[60vh] ">
         <div class="main-modal relative bg-black flex w-full h-full justify-center align-center">
             <div class="bg-black-80 flex justify-center align-center text-white modal-content ">
                 <div class="flex justify-center items-center w-full ">
