@@ -31,7 +31,7 @@ class SignupForm(FlaskForm):
     ])
     
     def validate_email(self, email):
-        from MovieApp.extensions import mongo
+        from MovieRec.extensions import mongo
         try:
             users_collection = mongo.db.users
             if users_collection.find_one({"email": email.data}):
@@ -50,7 +50,7 @@ class LoginForm(FlaskForm):
     ])
     
     def validate_credentials(self):
-        from MovieApp.extensions import mongo
+        from MovieRec.extensions import mongo
         try:
             users_collection = mongo.db.users
             user = users_collection.find_one({"email": self.email.data})

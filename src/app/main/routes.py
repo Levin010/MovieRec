@@ -7,13 +7,7 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
 
 main_bp = Blueprint('main', __name__) 
 
-'''
-@main_bp.route('/')
-def index():
-    signup_form = SignupForm()
-    login_form = LoginForm()
-    return render_template('main/home.html', signup_form=signup_form, login_form=login_form)
-'''
+
 @main_bp.route('/')
 def index():
 

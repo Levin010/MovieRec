@@ -1,6 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<header>
+
+  <h1>Movie Rec</h1>
+  <nav>
+      <ul>
+          <li><a href="{{ url_for('user.signup') }}">Sign Up</a></li>
+          <li><a href="{{ url_for('user.login') }}">Login</a></li>
+      </ul>
+  </nav>
+</header>
+<main>
+  
   <div class="card-wrapper">
     <!-- Signup Card -->
     <div class="card">
@@ -33,4 +46,5 @@
     </div>
 
   </div>
+</main>  
 {% endblock %}
