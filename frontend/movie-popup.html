@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Details Page</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="test.css"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Sen:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+
+    <style>
+        /* .overlay_black{
+            background-image: linear-gradient(to top, #000001d6, #00000000);
+            z-index: 20;
+        } */
+        .image-div {
+            background-image: linear-gradient(to right,#14181d,#14181dfb .97%,rgba(20,24,29,.945) 2.07833333%,
+            rgba(20,24,29,.882) 3.29666667%,rgba(20,24,29,.804) 4.60166667%,rgba(20,24,29,.71) 5.96666667%,
+            rgba(20,24,29,.608),rgba(20,24,29,.5),rgba(20,24,29,.396) 10.16%,rgba(20,24,29,.294) 11.505%,
+            rgba(20,24,29,.204) 12.78%,rgba(20,24,29,.12) 13.95833333%,rgba(20,24,29,.06) 15.01666667%,rgba(20,24,29,.016) 15.92833333%,
+            rgba(20,24,29,0) 16.66666667%,rgba(20,24,29,0) 83.33333333%,rgba(20,24,29,.016) 84.07166667%,
+            rgba(20,24,29,.06) 84.98333333%, rgba(20,24,29,.12) 86.04166667%,rgba(20,24,29,.204) 87.22%,
+            rgba(20,24,29,.294) 88.495%,rgba(20,24,29,.396) 89.84%, rgba(20,24,29,.5),rgba(20,24,29,.608),
+            rgba(20,24,29,.71) 94.03333333%,rgba(20,24,29,.804) 95.39833333%,rgba(20,24,29,.882) 96.70333333%,
+            rgba(20,24,29,.945) 97.92166667%,rgba(20,24,29,.984) 99.03%,#14181d),
+            linear-gradient(to bottom,#14181d,#14181d 21.48148148%, rgba(20,24,29,.984) 23.63703704%,
+            rgba(20,24,29,.945) 26.1%,rgba(20,24,29,.882) 28.80740741%,rgba(20,24,29,.804) 31.70740741%,
+            rgba(20,24,29,.71) 34.74074074%,rgba(20,24,29,.608),rgba(20,24,29,.5) 40.97407407%,
+            rgba(20,24,29,.396) 44.05925926%, rgba(20,24,29,.294) 47.04814815%,rgba(20,24,29,.204) 49.88148148%,
+            rgba(20,24,29,.12) 52.5%,rgba(20,24,29,.06) 54.85185185%, rgba(20,24,29,.016) 56.87777778%,
+            rgba(20,24,29,0) 58.51851852%);
+        }
+        .zinc-bg{
+            background: linear-gradient(to bottom, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.4) 10%, #14181d 100%); 
+        
+        }
+        body::-webkit-scrollbar{
+            display: none;
+        }
+        .middle-col{
+            box-shadow: silver;
+        }
+        </style>
+</head>
+
+<body class="bg-[#14181d] overflow-auto no-scroll"  >
+    <div class="navbar sticky top-0 w-full h-12 bg-black">
+        <div class="navbar-container flex items-center px-12 h-full text-white font-sans">
+            <div class="logo-container flex-1">
+                <h1 class="logo text-2xl text-green-500">MovieRec</h1>
+            </div>
+            <div class="menu-container flex-6">
+                <ul class="menu-list flex list-none">
+                    <li class="menu-list-item mr-8 font-bold text-yellow-400">Home</li>
+                    <li class="menu-list-item mr-8">Movies</li>
+                    <li class="menu-list-item mr-8">Series</li>
+                    <li class="menu-list-item mr-8">Popular</li>
+                    <li class="menu-list-item mr-8">Trends</li>
+                </ul>
+            </div>
+            <div class="profile-container flex-2 flex items-center justify-end ">
+                <img class="profile-picture w-8 h-8 rounded-full object-cover" src="Assets/Home_Movie1.jpeg" alt="">
+                <div class="profile-text-container mx-5 flex items-center cursor-pointer">
+                    <span class="profile-text">Profile</span>
+                    <i class="fas fa-caret-down"></i>
+                </div>
+                <div class="toggle w-10 h-5 bg-white rounded-full flex items-center justify-around relative">
+                    <i class="fas fa-moon text-yellow-500"></i>
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <div
+                        class="toggle-ball w-4.5 h-4.5 bg-black absolute right-0 rounded-full cursor-pointer transition-all duration-1000">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 
+    <div class="sidebar fixed top-0 w-12 h-full bg-black flex flex-col items-center pt-14 z-10">
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-search"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-home"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-users"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-bookmark"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-tv"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-hourglass-start"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-shopping-cart"></i>
+    </div> -->
+
+
+
+    <div class=" pl-12  w-full movie-cover relative flex -z-1  h-[60vh] overflow-hidden  ">
+        <div class="w-full h-full flex justify-center ">
+             <img src="Assets/Home_Movie2.webp" alt="" class=" -z-1 w-full object-cover h-9/8 scrollbar-none "> 
+            </div>
+        <div class=" absolute inline  z-10 image-div w-screen h-11/8 scrollbar-none "> 
+          <h1 class="text-transparent">sd</h1>
+       </div> 
+    
+    </div>
+
+    <div class="p-18 pt-9 review-class lg:grid lg:grid-cols-4 zinc-bg text-white    ">
+<!-- THe First Column -->
+        <div class="col1 col-span-1 space-y-8 ">
+            <div class="top-row">
+                <div class="movie_poster flex justify-center w-full">
+                    <img src="Assets/Movie10.jpg" alt="" class="rounded-xl w-[80%] ">
+                </div>
+                <div class="review-metadata bg-black flex place-content-evenly w-[70%] place-self-center mt-1">
+                    <i class="fas fa-eye fa-spin-pulse" style="color: #1ed01b;"> <p class="inline text-white">30k</p></i>
+                    <i class="fas fa-heart" style="color: #e7881aec;"> <p class="inline text-white">30k</p></i>
+                    <i class="fas fa-bookmark " style="color: #2882d6;"><p class="inline text-white">30k</p></i>
+                </div>
+            </div>
+            <div class="mid-row ">
+                <div class="ratings w-full ">
+                   <div class="flex justify-center w-full ">
+                       <div class="border-1 border-black w-[80%] rounded-t-xl text-center text-white text-start ">
+                            <div class="w-full text-center bg-gray-800 rounded-t-xl text-white"> Ratings </div>
+                                <div class="border-b-1 border-black w-full">
+                                    <i class="fas fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                </div>
+                                <div class="border-b-1 border-black p-1">
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                </div>
+
+                                <div class="border-b-1 border-black p-1">
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                </div>
+                                <div class="border-b-1 border-black p-1">
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                </div>
+                                <div class="border-b-1 border-black p-1">
+                                <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                </div>
+                        </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+<!-- The Second Column: The middle and larger column -->
+        <div class="col2 middle-col col-span-2 space-y-8 shadow-2xl shadow-teal-950/50">
+            <div id="movie-details" class="movie-details space-y-4 ">
+                <div class="title-details p-4">
+                    <div class="text-4xl font-semibold"> The Platform  the movie the myth <p class=" inline text-xl underline decoration-dotted underline-offset-2 px-2 font-normal">2019</p>
+                        <p class="inline text-2xl font-normal">Directed by <p class="inline text-xl underline decoration-dotted underline-offset-2 px-2 font-normal">Galder Gaztelu-Urrutia </p></p></div>
+                    
+                </div>
+                <div class="description-details">
+                    <div class="description p-4">
+                        <p class="">In a prison where inmates are fed on a descending platform, those on the upper levels take more than their
+                        fair share while those below are left to starve on scraps, and one man decides to change the system.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="metadata p-4 ">
+                <div class="tab-div flex justify-evenly">
+                    <button class="tab-link w-full border-b-2 text-[#99AABB] hover:text-green-600 hover:border-b-3 hover:border-green-600 hover:underline-offset-10" data-tab="cast">CAST</button>
+                    <button class="tab-link w-full border-b-2 text-[#99AABB] hover:text-green-600 hover:border-b-3 hover:border-green-600" data-tab="genre">GENRE</button>
+                    <button class="tab-link w-full border-b-2 text-[#99AABB] hover:text-green-600 hover:border-b-3 hover:border-green-600" data-tab="details">DETAILS</button>
+                    <button class="tab-link w-full border-b-2 text-[#99AABB] hover:text-green-600 hover:border-b-3 hover:border-green-600" data-tab="crew">CREW</button>
+                </div>
+
+                <div id="cast" class="cast tab-content hidden text-black hover:text-green-600 hover:border-t-1 hover:border-green-600 p-4">
+
+                    <ul class="text-white  w-full h-fit ">
+                        <li class="inline bg-gray-700 rounded-md px-[5px] py-[2px] text-sm/7 mx-1"><a href=""></a>Ivan Massagué</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Antonia San Juan</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Zorion Eguileor</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Emilio Buale</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Alexandra Masangkay</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Zihara Llana</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Mario Pardo</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Algis Arlauskas</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Txubio Fernández de Jáuregui</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Eric Goode</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Óscar Oliver</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Chema Trujillo</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Miriam Martín</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Gorka Zufiaurre</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Miriam K. Martxante</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Miren Gaztañaga</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Braulio Cortés</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Javier Mediavilla</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Álvaro Orellana</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Juan Dopico</li>
+                        <li class="inline bg-gray-700 rounded-sm px-[5px] py-[2px] text-sm/7 mx-1 "><a href=""></a>Lian Xushao</li>                   
+                    </ul>
+                   
+                  
+                </div>
+
+                <div id="genre" class="genres tab-content  text-white ">
+                    <div class="genres-div py-4 gap-2">
+                        <p class="text-gray-200/80 mb-2 text-sm/7">GENRES</p>
+                        <div class="genres-wrapper flex space-x-4">
+                            <div class="text-[#9ab] text-sm bg-gray-800 w-fit px-2 py-[2px] rounded">Drama</div>
+                            <div class="text-[#9ab] text-sm bg-gray-800 w-fit px-2 py-[2px] rounded">Science Fiction</div>
+                            <div class="text-[#9ab] text-sm bg-gray-800 w-fit px-2 py-[2px] rounded">Thriller</div>
+                        </div>
+                    </div>
+                    <div class="genres-div">
+                        <p class="text-gray-200/80 mb-2 text-sm/7">THEMES</p>
+                        <div class="genres-wrapper flex space-x-4">
+                            <div class="text-[#9ab] text-sm bg-gray-800 w-fit px-2 py-[2px] rounded">Intense Violence and Sexual Transgression</div>
+                            <div class="text-[#9ab] text-sm bg-gray-800 w-fit px-2 py-[2px] rounded">Wuueeh</div>
+                            <div class="text-[#9ab] text-sm bg-gray-800 w-fit px-2 py-[2px] rounded">Hizo zimetosha</div>
+                      </div>  
+                    </div>
+                </div>
+                
+                <div id="details" class="details tab-content hidden text-black hover:text-green-600 hover:border-b-1 hover:border-green-600 ">
+                    DETAILS
+                </div>
+
+                <div id="crew" class="crew tab-content hidden text-white  ">
+                    <div class="directors-div">
+                        <p>DIRECTOR</p>
+                        <div>Dougal Wilson</div>
+                    </div>
+                    <div class="directors-div">
+                        <p>DIRECTOR</p>
+                        <div>Dougal Wilson</div>
+                    </div>
+                    <div class="directors-div">
+                        <p>DIRECTOR</p>
+                        <div>Dougal Wilson</div>
+                    </div>
+                   
+                </div>
+                
+                
+              
+            </div>
+            
+            <div class="reviews-section p-4">
+                <div class="flex border-b-2 ">
+                    <p class="text-xl w-full ">Popular Reviews <p><a class="text-end text-sm text-gray-600 " href="homepage.html">More</a></p></p>
+                </div>
+
+                <div class="review-div border-b-1 mb-4 pb-4">
+                    <div class="review-grid grid grid-cols-6">
+
+                        <div class="profile-pic-grid col-span-1 flex justify-center items-center">
+                            <img src="Assets/Movie13.jpg" alt="" class="h-[70px] w-[70px] rounded-full">
+                        </div>
+                      
+                        <div class="review-header col-span-5 w-full pt-2 ">
+                                                       
+                            <div class="review-head">
+                                <div class="text-sm flex ">Reviewed by 
+                                    <p class="px-1 font-semibold">Rhema</p> 
+                                    <div class="ratings-div flex pr-3">
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    </div>
+                                    <div class="comment-div">
+                                        <i class="fas fa-comments" style="color: #c931c4;"></i>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="review-text pt-4" id="">
+                            whoever is at the top abuses those below them, and that dynamic can shift at any time. A slab of food
+                            descends down a vertical facility. The residents above eat heartily, leaving those below starving and
+                            desperate. A rebellion is imminent
+                            </div>
+
+                            <div class="likes-div">
+                                <p class="inline"> <i class="fas fa-heart text-gray-400 inline"></i>  14,200 Likes</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="review-div border-b-1 mb-4 pb-4">
+                    <div class="review-grid grid grid-cols-6">
+                        <div class="profile-pic-grid col-span-1 flex justify-center items-center">
+                            <img src="Assets/Movie1.jpg" alt="" class="h-[70px] w-[70px] rounded-full">
+                        </div>
+                      
+                        <div class="review-header col-span-5 w-full pt-2 ">
+                            
+                            
+                            <div class="review-head">
+                                <div class="text-sm flex ">Reviewed by 
+                                    <p class="px-1 font-semibold">Mutethia</p> 
+                                    <div class="ratings-div flex pr-3">
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    </div>
+                                    <div class="comment-div">
+                                        <i class="fas fa-comments" style="color: #c931c4;"></i>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="review-text pt-4" id="">
+                            whoever is at the top abuses those in lower levels by eating all the food.
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div> 
+                <div class="review-div border-b-1 mb-4 pb-4">
+                    <div class="review-grid grid grid-cols-6">
+                        <div class="profile-pic-grid col-span-1 flex justify-center items-center">
+                            <img src="Assets/Movie11.jpg" alt="" class="h-[70px] w-[70px] rounded-full">
+                        </div>
+                      
+                        <div class="review-header col-span-5 w-full pt-2 ">
+                            
+                            
+                            <div class="review-head">
+                                <div class="text-sm flex ">Reviewed by 
+                                    <p class="px-1 font-semibold">Tesh</p> 
+                                    <div class="ratings-div flex pr-3">
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    </div>
+                                    <div class="comment-div">
+                                        <i class="fas fa-comments" style="color: #c931c4;"></i>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="review-text pt-4" id="">
+                           The residents above eat heartily, leaving those below starving and desperate. A rebellion is imminent
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+            <div class="recent-reviews-section p-4">
+                <div class="flex border-b-2 ">
+                    <p class="text-xl w-full ">Recent Reviews <p><a class="text-end text-sm text-gray-600 " href="#">More</a></p></p>
+                </div>
+
+                <div class="review-div border-b-1 mb-4 pb-4">
+                    <div class="review-grid grid grid-cols-6">
+
+                        <div class="profile-pic-grid col-span-1 flex justify-center items-center">
+                            <img src="Assets/Movie12.jpg" alt="" class="h-[70px] w-[70px] rounded-full">
+                        </div>
+                      
+                        <div class="review-header col-span-5 w-full pt-2 ">
+                                                       
+                            <div class="review-head">
+                                <div class="text-sm flex ">Reviewed by 
+                                    <p class="px-1 font-semibold">Rhema</p> 
+                                    <div class="ratings-div flex pr-3">
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    </div>
+                                    <div class="comment-div">
+                                        <i class="fas fa-comments" style="color: #c931c4;"></i>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="review-text pt-4" id="">
+                            whoever is at the top abuses those below them, and that dynamic can shift at any time. A slab of food
+                            descends down a vertical facility. The residents above eat heartily, leaving those below starving and
+                            desperate. A rebellion is imminent
+                            </div>
+
+                        
+
+                        </div>
+
+                    </div>
+                    
+                </div>
+                <div class="review-div border-b-1 mb-4 pb-4">
+                    <div class="review-grid grid grid-cols-6">
+                        <div class="profile-pic-grid col-span-1 flex justify-center items-center">
+                            <img src="Assets/Movie1.jpg" alt="" class="h-[70px] w-[70px] rounded-full">
+                        </div>
+                      
+                        <div class="review-header col-span-5 w-full pt-2 ">
+                            
+                            
+                            <div class="review-head">
+                                <div class="text-sm flex ">Reviewed by 
+                                    <p class="px-1 font-semibold">Mutethia</p> 
+                                    <div class="ratings-div flex pr-3">
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    </div>
+                                    <div class="comment-div">
+                                        <i class="fas fa-comments" style="color: #c931c4;"></i>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="review-text pt-4" id="">
+                            whoever is at the top abuses those in lower levels by eating all the food.
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div> 
+                <div class="review-div border-b-1 mb-4 pb-4">
+                    <div class="review-grid grid grid-cols-6">
+                        <div class="profile-pic-grid col-span-1 flex justify-center items-center">
+                            <img src="Assets/Movie11.jpg" alt="" class="h-[70px] w-[70px] rounded-full">
+                        </div>
+                      
+                        <div class="review-header col-span-5 w-full pt-2 ">
+                            
+                            
+                            <div class="review-head">
+                                <div class="text-sm flex ">Reviewed by 
+                                    <p class="px-1 font-semibold">Tesh</p> 
+                                    <div class="ratings-div flex pr-3">
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                        <i class="fas  fa-star" style="color: #FFD43B;"></i>
+                                    </div>
+                                    <div class="comment-div">
+                                        <i class="fas fa-comments" style="color: #c931c4;"></i>
+                                    </div>
+                            
+                                </div>
+                            </div>
+
+                            <div class="review-text pt-4" id="">
+                           The residents above eat heartily, leaving those below starving and desperate. A rebellion is imminent
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+
+        </div>
+
+
+<!-- The third Column -->
+        <div class="col3 col-span-1 space-y-8  px-5 ">
+            <div id="review-button" class="add-review flex justify-center">
+                <button class="text-[20px] w-3/4 bg-teal-800/80 hover:bg-indigo-500 transition hover:shadow-inset shadow-indigo-800">Add your review</button>
+            </div>
+            <div id="login-div" class="login-div hidden rounded-xl gap-4 bg-gray-800/80 p-2 ">
+
+                <div class="login-state-text grid justify-items-center mt-5 ">
+                    <p><a href="#" class="font-semibold">Log in</a> to continue</p>
+                </div>
+                <p class="text-center">or</p>
+                <div class="signup-state-text grid gap-4 justify-items-center mb-6">
+                    <a href="#" class="p-2 bg-gray-400/80 rounded-xl w-4/5 text-center">Sign up with <img class="inline" width="23" height="23" src="https://img.icons8.com/color/48/google-logo.png" alt="google-logo" /></i></a>
+                    <a href="#" class="p-2 bg-gray-400/80 rounded-xl w-4/5 text-center">Sign up with email <i class="fas fa-envelope text-blue-700"></i></a>
+                </div>
+
+            </div>
+
+            <div class="similar-movies ">
+                <div class="flex border-b-2 px-0">
+                    <p class="text-xl w-full ">Similar Movies<p><a class="text-end text-sm text-gray-600 " href="">More</a></p></p>
+                </div>
+                <div class="similar-movies-col px-5 py-2 grid grid-cols-2 gap-4 ">
+                    <div class="w-full">
+                        <div class="card">
+                            <img src="Assets/Movie7.jpg" alt="Image not Found" class="rounded w-[80%]  ">
+                        </div>
+        
+                    </div>
+                    <div class="w-full">
+                        <div class="card">
+                            <img src="Assets/Movie8.jpg" alt="Image not Found" class="rounded w-[80%]  ">
+                        </div>
+        
+                    </div>
+                    <div class="w-full">
+                        <div class="card">
+                            <img src="Assets/Movie9.jpg" alt="Image not Found" class="rounded w-[80%]  ">
+                        </div>
+        
+                    </div> <div class="w-full">
+                        <div class="card">
+                            <img src="Assets/Movie10.jpg" alt="Image not Found" class="rounded w-[80%]  ">
+                        </div>
+        
+                    </div>
+                    <div class="w-full">
+                        <div class="card">
+                            <img src="Assets/Movie5.jpeg" alt="Image not Found" class="rounded w-[80%]  ">
+                        </div>
+        
+                    </div> <div class="w-full">
+                        <div class="card">
+                            <img src="Assets/Movie6.jpeg" alt="Image not Found" class="rounded w-[80%]  ">
+                        </div>
+        
+                    </div>
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        // The Tab functionality:
+        document.addEventListener("DOMContentLoaded", function() {
+            const tabs = document.querySelectorAll(".tab-link");
+            const tabContent = document.querySelectorAll(".tab-content");
+
+            tabs.forEach(tab => {
+                tab.addEventListener("click", function () {  
+                    const target = this.getAttribute("data-tab");
+
+                    tabs.forEach(t => t.classList.remove('text-green-600'));
+
+                    tabContent.forEach(content => content.classList.add("hidden"));
+                    document.getElementById(target).classList.remove("hidden");
+                    this.classList.add('text-green-600');
+                   
+                    });
+
+                });
+               
+                
+            });
+
+            // The Login Prompt on clicking Add your Review button
+            const reviewButton = document.getElementById('review-button');
+            const loginDiv = document.getElementById('login-div');
+            
+            reviewButton.addEventListener("click", function(){
+
+                reviewButton.classList.add('hidden');
+                loginDiv.classList.remove('hidden');
+                
+            })
+
+
+        // The Character Truncate Function
+
+    //     document.addEventListener("DOMContentLoaded", function(){
+    //         const reviewTextDiv = document.querySelectorAll(".review-text");
+    //         const fullText = reviewTextDiv.textContent;
+    //         const maximumChars = 162;
+    //         newl = fullText.length
+    //         console.log(newl)
+
+    //         if(fullText.length > maximumChars){
+    //               let truncatedText = fullText.slice(0, maxChars);
+    //               let lastSpaceIndex = truncatedText.lastIndexOf(" ");
+
+    //         if (lastSpaceIndex !== -1) {
+    //             truncatedText = truncatedText.slice(0, lastSpaceIndex); 
+    //     }
+
+    //     reviewTextDiv.innerHTML = `${truncatedText}... <a href="#" class="read-more">Read More</a>`;
+    //     }
+            
+    // });
+        
+    </script>
+</body>
+
+</html>
