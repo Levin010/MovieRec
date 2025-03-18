@@ -23,7 +23,6 @@ mail.init_app(app)
 jwt = JWTManager(app)
 csrf = CSRFProtect(app)
 
-# Register blueprints
 app.register_blueprint(main_bp)
 app.register_blueprint(user_bp, url_prefix='/user')
 app.register_blueprint(profile_bp, url_prefix='/profile')
