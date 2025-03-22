@@ -1,6 +1,12 @@
+.gitignore 
 venv/
 __pycache__/
 *.pyc
 *.pyo
 .env
 .DS_Store
+
+se.html
+sa.html
+movies.js
+script2.js
