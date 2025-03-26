@@ -6,7 +6,11 @@ __pycache__/
 .env
 .DS_Store
 
+<<<<<<< HEAD
 se.html
 sa.html
 movies.js
 script2.js
+=======
+ac_token.js
+>>>>>>> main
