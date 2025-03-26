@@ -1,6 +1,9 @@
+const accessToken = config.access_token
+
+
 document.addEventListener("DOMContentLoaded", () => {
     const API_URL = "https://api.themoviedb.org/3/movie/popular";
-    const ACCESS_TOKEN = "d057ab02f87403432232af136510b194z"; // Replace with your TMDB API token
+    const ACCESS_TOKEN = `${accessToken}`; // Replace with your TMDB API token
     const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
     async function fetchMovies() {

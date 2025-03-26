@@ -4,3 +4,5 @@ __pycache__/
 *.pyo
 .env
 .DS_Store
+
+ac_token.js
