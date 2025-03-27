@@ -2,7 +2,15 @@ venv/
 __pycache__/
 *.pyc
 *.pyo
-.env
+*.env
 .DS_Store
 
 ac_token.js
+_.env
+*node_modules
+# test.js
+# test.html
+# test.css
+
+
+*config.js
