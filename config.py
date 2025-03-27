@@ -29,3 +29,5 @@ class Config:
     MAIL_DEFAULT_SENDER = os.getenv("MAIL_DEFAULT_SENDER")
 
 
+    #TMDB API
+    API_KEY = os.getenv("API_KEY")
