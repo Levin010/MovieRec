@@ -1,16 +1,16 @@
-.gitignore 
 venv/
 __pycache__/
 *.pyc
 *.pyo
-.env
+*.env
 .DS_Store
 
-<<<<<<< HEAD
-se.html
-sa.html
-movies.js
-script2.js
-=======
 ac_token.js
->>>>>>> main
+_.env
+*node_modules
+# test.js
+# test.html
+# test.css
+
+
+*config.js

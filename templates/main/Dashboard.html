@@ -1,0 +1,222 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="test.css"> -->
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <title>MovieRec</title>
+
+    <style>
+        *, body{
+            font-family: "Raleway", sans-serif;
+           
+            
+        }
+
+         .image-div {
+            background:
+            linear-gradient(to right,#14181d,#14181dfb .97%,rgba(16, 24, 40, .9) 2%,
+            rgba(16,24,40,.882) 3%,rgba(16,24,40,.804) 4%,rgba(16,24,40,.71) 5%,
+            rgba(16,24,40,.608),rgba(16,24,40,.5),rgba(16,24,40,.396) 10%,rgba(16,24,40,.294) 11%,
+            rgba(16,24,40,.204) 12%,rgba(16,24,40,.12) 13%,rgba(16,24,40,.06) 15%,rgba(16,24,40,.016) 15%,
+            rgba(16,24,40,0) 16%,rgba(16,24,40,0) 83%,rgba(16,24,40,.016) 84%,
+            rgba(16,24,40,.06) 84%, rgba(16,24,40,.12) 86%,rgba(16,24,40,.204) 87%,
+            rgba(16,24,40,.294) 88%,rgba(16,24,40,.396) 89%, rgba(16,24,40,.5),rgba(16,24,40,.608),
+            rgba(16,24,40,.71) 94%,rgba(16,24,40,.804) 95%,rgba(16,24,40,.882) 96%,
+            rgba(16,24,40,.945) 97%,rgba(16,24,40,.984) 99%,#14181d),
+
+            linear-gradient(to top,#14181d,#14181d 21%, rgba(20,24,29,.984) 23%,
+            rgba(20,24,29,.945) 26%,rgba(20,24,29,.882) 28%,rgba(20,24,29,.804) 31%,
+            rgba(20,24,29,.71) 34%,rgba(20,24,29,.608),rgba(20,24,29,.5) 40%,
+            rgba(20,24,29,.396) 44%, rgba(20,24,29,.294) 47%,rgba(20,24,29,.204) 49%,
+            rgba(20,24,29,.12),rgba(20,24,29,.06) 54%, rgba(20,24,29,.016) 56%,
+            rgba(20,24,29,0) 100%);
+        }
+        .overlay{
+        background: linear-gradient(to bottom, transparent 0%, transparent 5%, rgba(0, 0, 0, 0.4) 10%, url('Assets/Home_Movie11.webp')100%); 
+        }
+
+        .custom-overlay::before{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0,0.8) 20%,  rgba(0, 0, 0,.7) 40%, rgba(0, 0, 0, 0.7) 50%, 
+            rgba(0, 0, 0, 0.48) 84%,  rgba(0, 0, 0, 0.4) 100%);
+                        
+            pointer-events: none;
+            z-index:1;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="navbar sticky top-0 w-full h-16 bg-gray-900">
+        <div class="navbar-container flex items-center justify-between pl-8 pr-12 h-full text-white font-sans">
+            <div class="logo-container flex  ">
+                <h1 class="logo text-2xl text-green-500 font-extrabold">MovieRec</h1>
+            </div>
+            <div class="search-bar-div w-[40%] flex justify-between bg-white  ">
+                <input type="text" class="bg-white w-[95%] h-10 px-1 text-black focus:border-none focus:outline-none ">
+                <i class="fa fa-search text-2xl text-white bg-green-600 px-2 h-10 py-2.5" id="search-button"></i>
+            </div>
+            <div class="menu-container flex ">
+                <ul class="menu-list flex list-none">
+                    <a href="{{ url_for('main.dashboard') }}" class="menu-list-item mr-8 font-bold  text-yellow-400">Dashboard</a>
+                    <a href="{{ url_for('main.dashboard') }}" class="menu-list-item mr-8">Movies</a>
+                    <a href="{{ url_for('main.dashboard') }}" class="menu-list-item mr-8">Reviews</a>
+                </ul>
+            </div>
+            <div class="notifications-div">
+                <a href="{{ url_for('main.dashboard') }}" class="menu-list-item mr-8"><i class="fa fa-bell text-xl"></i></a>
+
+            </div>
+
+            <!-- !!!!! Convert the profile section to a drop down  -->
+            <div class="profile-container flex items-center justify-end space-x-2 -mr-8 ">
+                <img class="profile-picture w-8 h-8 rounded-full object-cover" src="{{ url_for('static', filename='images/Assets/Home_Movie1.jpeg') }}" alt="">
+                <div class="toggle w-10 h-5 bg-white rounded-full flex items-center justify-around relative">
+                    <i class="fas fa-moon text-yellow-500"></i>
+                    <i class="fas fa-sun text-yellow-500"></i>
+                    <div
+                        class="toggle-ball w-4.5 h-4.5 bg-black absolute right-0 rounded-full cursor-pointer transition-all duration-1000">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
+        <i class="fas fa-bars" id="menuIcon"></i>
+    </button>
+
+    <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-95 z-40 hidden lg:hidden">
+        
+        <div class="flex flex-col relative items-start justify-start no-scroll h-full space-y-4 px-10 mt-20">
+            <div>
+                <a href="{{ url_for('profile.user_profile') }}"
+                class=" w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
+                <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i> My Profile
+
+                </a>
+            </div>
+            <a href="{{ url_for('main.dashboard') }}" class="text-white text-md font-light  border-b w-full pb-2">Dashboard</a>
+            <a href="{{ url_for('main.dashboard') }}" class="text-white text-md font-light border-b w-full pb-2"> Movies</a>
+            <a href="{{ url_for('main.dashboard') }}" class="text-white text-md font-light border-b w-full pb-2"> Reviews</a>
+            <a href="{{ url_for('main.dashboard') }}" class="text-white text-md font border-b w-full pb-2"><i class="fa fa-bell text-xl"> Notifications</i></a>
+            <a href="{{ url_for('main.dashboard') }}" class="text-white text-md font-light"> </a>
+            <a href="{{ url_for('main.dashboard') }}"
+                class=" w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
+                Review Movie
+            </a>
+        </div>
+    </div>
+    
+    <!-- <div class="sidebar fixed top-0 w-12 h-full bg-black flex flex-col items-center pt-14">
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-search"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-home"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-users"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-bookmark"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-tv"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-hourglass-start"></i>
+        <i class="left-menu-icon text-white text-xl mb-10 fas fa-shopping-cart"></i>
+    </div> -->
+    <div class="relative flex flex-col justify-center items-center w-full">
+        <div class="relative custom-overlay h-[75vh] py-12 px-20 w-full custom-background" style=" background-blend-mode:screen;" id="highlight-movie">
+          <div class="movie-desc w-fit absolute z-20 top-14">
+            <img class="w-24 relative" src="https://image.tmdb.org/t/p/w500{{ HighlightMovie['poster_path']}}" alt="{{ HighlightMovie['poster_path']}} Poster" />
+            <p class="w-2/7 text-white my-8" >{{ HighlightMovie['overview'] }}</p> <!-- Movie description will go here -->
+            <button class="bg-[#4dbf00] text-white py-2 px-4 rounded-lg font-bold">Review</button>
+          </div>
+        </div>
+      
+        <div class="bg-gray-900 text-white w-full">
+          <!-- Movie List Container -->
+          <div class="px-5 py-4">
+            <p class="text-3xl font-bold text-white -mb-4">Trending Movies</p>
+            <div class="relative overflow-hidden">
+              <div class="flex items-center h-[300px] transition-all duration-1000 ease-in-out pl-4">
+                <!-- Movie Item 1 -->
+                {% for movie in TrendingMovies %}
+                    <div class="relative mr-8 group">
+                    <img class="w-[240px] h-[200px] object-top rounded-2xl transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:opacity-50" src="https://image.tmdb.org/t/p/w500/{{ movie['poster_path']}}" alt="{{ movie['poster_path']}} Poster" />
+                    <div class="movie-details-div">
+                        <span class="absolute top-9 left-0 text-3xl font-bold text-white opacity-0 px-4 transition-all duration-1000 ease-in-out group-hover:opacity-100">{{  movie['original_title'] | truncate(11, True) }}</span> <!-- Movie Title -->
+                        <p class="absolute top-1/3 left-0 w-[230px] bg-gray-900/70 text-white p-2 px-3 text-sm opacity-0 transition-all duration-1000 ease-in-out group-hover:opacity-100">{{ movie['overview'] | truncate(100,True) }}</p> <!-- Movie Description -->
+                    </div>
+                    <button class="absolute bottom-0 left-12 bg-[#4dbf00] text-white py-2 px-4 rounded-lg opacity-0 transition-all duration-1000 ease-in-out group-hover:opacity-100">Review</button>
+                    </div>
+                {% else %}
+                <div class="relative mr-8 group">
+                    No Movie Found
+                </div>
+                {% endfor %}
+
+            </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="bg-gray-900 text-white w-full">
+            <!-- Movie List Container -->
+            <div class="px-5 py-4">
+              <p class="text-3xl font-bold text-white -mb-4">Recommended Movies</p>
+              <div class="relative overflow-hidden">
+                <div class="flex items-center h-[300px] transition-all duration-1000 ease-in-out pl-4">
+                  <!-- Movie Item 1 -->
+                  {% for movie in TrendingMovies %}
+                      <div class="relative mr-8 group">
+                      <img class="w-[240px] h-[200px] object-top rounded-2xl transition-all duration-1000 ease-in-out group-hover:scale-110 group-hover:opacity-50" src="https://image.tmdb.org/t/p/w500/{{ movie['poster_path']}}" alt="{{ movie['poster_path']}} Poster" />
+                      <div class="movie-details-div">
+                          <span class="absolute top-9 left-0 text-3xl font-bold text-white opacity-0 px-4 transition-all duration-1000 ease-in-out group-hover:opacity-100">{{  movie['original_title']  }}</span> <!-- Movie Title -->
+                          <p class="absolute top-1/3 left-0 w-[230px] bg-gray-900/70 text-white p-2 px-3 text-sm opacity-0 transition-all duration-1000 ease-in-out group-hover:opacity-100">{{ movie['overview'] | truncate(100,True) }}</p> <!-- Movie Description -->
+                      </div>
+                      <button class="absolute bottom-0 left-12 bg-[#4dbf00] text-white py-2 px-4 rounded-lg opacity-0 transition-all duration-1000 ease-in-out group-hover:opacity-100">Review</button>
+                      </div>
+                  {% else %}
+                  <div class="relative mr-8 group">
+                      No Movie Found
+                  </div>
+                  {% endfor %}
+  
+              </div>
+              </div>
+            </div>
+          </div>
+      </div>
+        
+      <script src="{{ url_for('static', filename='js/frontend/script.js') }}"></script>
+    
+      <script>
+       document.addEventListener("DOMContentLoaded", function() {
+        // Select the element
+        var descriptionElement = document.getElementById('movie-description');
+        
+        // Get the movie description text
+        var descriptionText = descriptionElement.innerText;
+
+        // Check if the description is longer than 100 characters
+        if (descriptionText.length > 100) {
+            // Truncate the text to 100 characters and add an ellipsis
+            descriptionElement.innerText = descriptionText.substring(0, 100) + "...";
+        }
+    });
+    </script>
+    
+    
+
+</body>
+
+</html>

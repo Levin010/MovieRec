@@ -1,8 +1,8 @@
 let currentSlide = 0;
     const images = [
-        "Assets/Home_Movie4.jpeg",
-        "Assets/Home_Movie1.jpeg",
-        "Assets/Home_Movie3.jpeg"
+        "static/images/Assets/Home_Movie4.jpeg",
+        "static/images/Assets/Home_Movie1.jpeg",
+        "static/images/Assets/Home_Movie3.jpeg"
     ];
     const totalSlides = images.length;
 

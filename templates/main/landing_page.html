@@ -21,7 +21,7 @@
         }
 
         .modal{
-        background: linear-gradient(to bottom, rgba(0,0,0,0), #000), linear-gradient(to left, rgba(0,0,0,0), #242121), linear-gradient(to right, rgba(0,0,0,0), #242121), url('Assets/Home_Movie2.webp');
+        background: linear-gradient(to bottom, rgba(0,0,0,0), #000), linear-gradient(to left, rgba(0,0,0,0), #242121), linear-gradient(to right, rgba(0,0,0,0), #242121), url('static/images/Assets/Home_Movie2.webp');
         }
         
 
@@ -103,7 +103,7 @@
         }
 
         .intro-overlay{
-        background: linear-gradient(to top, rgba(0,0,0,0), #000), linear-gradient(to left, rgba(58, 54, 54, 0.8), #242121), linear-gradient(to right, rgba(58, 54, 54, 0.8), #242121), url('Assets/Home_Movie2.webp');
+        background: linear-gradient(to top, rgba(0,0,0,0), #000), linear-gradient(to left, rgba(58, 54, 54, 0.8), #242121), linear-gradient(to right, rgba(58, 54, 54, 0.8), #242121), url('images/Assets/Home_Movie2.webp');
 
         }
 
@@ -111,22 +111,16 @@
 </head>
 
 
-
-
-
 <body class="">
 
     <nav class=" top-0 left-0 w-full h-16 bg-black/80 py-4 px-4 z-50 lg:px-10 justify-around items-center">
         <div class="flex justify-around items-center gap-[20px] ">
             <!-- Logo -->
-            <div><a href="" class="text-white text-lg font-light">Movie Rec</a></div>
+            <div><a href="{{ url_for('main.index') }}   " class="text-yellow-500 text-4xl font-bold"><span class="text-green-600">Movie</span> Rec</a></div>
 
             <!-- Desktop Menu - Hidden on medium and small screens -->
             <div class="hidden lg:flex space-x-1">
-                <a href=""
-                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">My
-                    Reviews</a>
-
+               
                 <a href=""
                     class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2"></a>
                 <a href=""
@@ -135,17 +129,24 @@
 
             </div>
 
-            <a href=""
-                class="hidden lg:flex py-1 px-2 text-white text-md font-light tracking-widest transition-colors duration-300 hover:bg-white hover:text-black hover:border-transparent">
-                Review Movie
-            </a>
-
-            <i class="fa fa-search" style="color: #ffffff;" id="userIcon" onclick="toggleSearch()"></i>
-            <div class="bg-black rounded w-[30px] h-[30px] rounded-full flex justify-around items-center">
-                <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i>
+            <div class="h-8 w-12 hover:bg-slate-400 flex justify-center items-center hover:rounded-4xl" onclick="toggleSearch()">
+                <i class="fa fa-search text-xl" style="color: #ffffff;" id="userIcon" onclick="toggleSearch()"></i>
             </div>
+            <div class="flex justify-center items-center space-x-4  ">
+                <div class="bg-black  w-[30px] h-[30px] rounded-full flex justify-around items-center">
+                    <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i>
+                    
+                </div>
+                <a href="{{ url_for('user.login') }}" 
+                    class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">
+                    Login</a>
+                <a href="{{ url_for('user.signup') }}" 
+                class="text-white text-sm lg:tracking-widest font-light hover:underline underline-offset-8 decoration-2">
+                Signup</a>
 
 
+
+            </div>
             <!-- Hamburger Menu - Visible only on medium and small screens -->
             <button class="lg:hidden text-white text-2xl" onclick="toggleMenu()">
                 <i class="fas fa-bars" id="menuIcon"></i>
@@ -155,24 +156,24 @@
 
     <div id="mobileMenu" class="fixed inset-0 bg-black bg-opacity-80 z-40 hidden">
         <div class="flex flex-col relative items-start justify-start no-scroll h-full space-y-4 px-10 mt-20">
-            <a href="{{ url_for('home') }}" class="text-white text-md font-light  border-b w-full pb-2">My Reviews</a>
-            <a href="{{ url_for('home') }}#about" class="text-white text-md font-light border-b w-full pb-2"></a>
-            <a href="{{ url_for('services') }}" class="text-white text-md font border-b w-full pb-2"></a>
-            <a href="{{ url_for('howwework') }}" class="text-white text-md font-light"></a>
-            <a href="{{ url_for('booking') }}"
+            <a href="{{ url_for('main.index') }}" class="text-white text-md font-light  border-b w-full pb-2">My Reviews</a>
+            <a href="{{ url_for('main.index') }}#about" class="text-white text-md font-light border-b w-full pb-2"></a>
+            <a href="{{ url_for('main.index') }}" class="text-white text-md font border-b w-full pb-2"></a>
+            <a href="{{ url_for('main.index') }}" class="text-white text-md font-light"></a>
+            <a href="{{ url_for('main.index') }}"
                 class=" w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
                 Review Movie
             </a>
-            <a href="{{ url_for('booking') }}"
+            <a href="{{ url_for('profile.user_profile') }}"
                 class=" w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
                 <i class="fa fa-user" style="color: #ffffff;" id="userIcon"></i> My Profile
 
             </a>
             <div class="loginNsignup w-full flex justify-center items-center gap-3">
-                <a href=""
+                <a href="{{ url_for('user.signup') }}"
                     class="w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
                     Sign Up</a>
-                <a href=""
+                <a href="{{ url_for('user.login') }}"
                     class="w-full border  py-2 px-8 text-center text-white text-md font-light tracking-wider transition-colors duration-300 hover:bg-white  hover:text-black hover:border-transparent">
                     Login</a>
             </div>
@@ -199,7 +200,7 @@
                             <i class="fas fa-chevron-left z-2 " onclick="changeSlide(-1)"></i>
                         </div>
                         <div class=" w-50%">
-                        <img id="modalImage" class="relative w-inherit aspect-16:9" src="Assets/Home_Movie1.jpeg" alt="Image not found" />
+                        <img id="modalImage" class="relative w-inherit aspect-16:9" src="{{ url_for('static', filename='images/Assets/Home_Movie1.jpeg') }}" alt="Image not found" />
                         </div>
                         <div id="rbutton" class=" hidden absolute flex items-center justify-center z-1 right-4 bg-black/50 rounded-full w-[40px] h-[40px] md:right-[4.5rem] lg:right-36 ">
                             <i class="fas fa-chevron-right z-50 " onclick="changeSlide(1)"></i>
@@ -211,9 +212,9 @@
                         
                         <!-- Progress Dots -->
                         <div id="progressDots" class="absolute hidden md:grid bottom-4  grid-cols-3 justify-center w-1/10 gap-[2px]">
-                            <img id="dot1" src="Assets/Home_Movie1.jpeg" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover" onclick="jumpToSlide(0)"></img>
-                            <img id="dot2" src="Assets/Home_Movie2.webp" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover" onclick="jumpToSlide(1)"></img>
-                            <img id="dot3" src="Assets/Home_Movie3.jpeg" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover    " onclick="jumpToSlide(2)"></img>
+                            <img id="dot1" src="{{ url_for('static', filename='images/Assets/Home_Movie1.jpeg') }}" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover" onclick="jumpToSlide(0)"></img>
+                            <img id="dot2" src="{{ url_for('static', filename='images/Assets/Home_Movie2.webp') }}" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover" onclick="jumpToSlide(1)"></img>
+                            <img id="dot3" src="{{ url_for('static', filename='images/Assets/Home_Movie3.jpeg') }}" class="dot w-6 h-8 bg-white rounded cursor-pointer object-cover    " onclick="jumpToSlide(2)"></img>
                         </div>
                         <div id="progressDots" class="absolute md:hidden bottom-4 flex flex-cols justify-center w-full space-x-2">
                             <div id="dot1" class="dot w-3 h-3 bg-white rounded-full cursor-pointer" onclick="jumpToSlide(0)"></div>
@@ -250,99 +251,25 @@
 <!-- Top Reviewed Movies section -->
         <div class="just-reviewed relative bg-black/90 p-8">
             <div class="relative text-white text-xl font-bold  lg:text-3xl pb-4 pl-4 underline decoration-green-600 decoration-2 underline-offset-10 text-center">Most Reviewed Movies</div>
-            <div class="w-full px-4 grid grid-cols-3 lg:grid-cols-10 gap-4 pb-10">
+            <div id="TopReviewedMovies-row" class="w-full px-4 grid grid-cols-3 lg:grid-cols-10 gap-4 pb-10">
+               {% for movie in MostReviewed %}
+
                 <div class=" movie-card w-full">
                     <div class="card">
-                        <img src="Assets/Movie1.jpg" alt="Image not Found" class="rounded">
+                        <img src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}" alt="{{ movie['title'] }} Poster" class="rounded">
                     </div>
                     <div class="reviews" >
-
+                        <p>Rating: {{ movie['vote_average'] }}/10</p>
                     </div>
 
-                </div>
+                </div>   
+                {% else %}
                 <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Movie2.jpg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
+                    
+                   No movies found!
 
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Movie1.jpg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Movie3.jpg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card ">
-                        <img src="Assets/Home_Movie1.jpeg" alt="Image not Found" class="rounded ">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Movie5.jpeg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Movie6.jpeg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Movie7.jpg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Home_Movie1.jpeg" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-                <div class=" movie-card w-full">
-                    <div class="card">
-                        <img src="Assets/Home_Movie2.webp" alt="Image not Found" class="rounded">
-                    </div>
-                    <div class="reviews" >
-
-                    </div>
-
-                </div>
-
-                
+                </div>   
+                {% endfor %} 
             </div>
 
 
@@ -352,37 +279,22 @@
         <!-- Recent Reviews -->
         <div class="just-reviewed relative bg-black/90 p-8">
             <div class="relative text-white text-xl font-bold  lg:text-3xl pb-4 pl-4 underline decoration-sky-300 decoration-2 underline-offset-10 text-center">Recently Reviewed</div>
-            <div class="w-full px-4 grid grid-cols-3 lg:grid-cols-10 gap-4 pb-10">
+            <div id="RecentlyReviewed-movies" class="w-full px-4 grid grid-cols-3 lg:grid-cols-10 gap-4 pb-10">
+               {% for movie in RecentReviewed %}
                 <div class="w-full">
                     <div class="card">
-                        <img src="Assets/Movie1.jpg" alt="Image not Found" class="rounded">
+                        <img src="https://image.tmdb.org/t/p/w500{{ movie['poster_path'] }}" alt="{{  movie['Title'] }} Poster" class="rounded">
                     </div>
 
                 </div>
-                <div class="w-full">
-                    <div class="card">
-                        <img src="Assets/Movie2.jpg" alt="Image not Found" class="rounded">
-                    </div>
-
-                </div>
-                <div class="w-full">
-                    <div class="card">
-                        <img src="Assets/Movie3.jpg" alt="Image not Found" class="rounded">
-                    </div>
-
-                </div>
-                <div class="w-full">
-                    <div class="card">
-                        <img src="Assets/Movie5.jpeg" alt="Image not Found" class="rounded">
-                    </div>
-
-                </div>
-                <div class="w-full">
-                    <div class="card">
-                        <img src="Assets/Movie7.jpg" alt="Image not Found" class="rounded">
-                    </div>
-
-                </div>
+                {% else %}
+                <div class=" movie-card w-full">
+                    
+                    No movies found!
+ 
+                 </div>   
+                {% endfor %} 
+                
             </div>
 
 
@@ -397,7 +309,7 @@
     
                     <div class="dev1 bg-gray-400/90 pb-8 rounded-md  md:w-3/6 h-7/8">
                         <div class="flex justify-center items-center pt-2">
-                            <img src="Assets/Movie1.jpg" alt="A Photo of Levin Omwenga"
+                            <img src="{{ url_for('static', filename='images/Assets/Movie1.jpg') }}" alt="A Photo of Levin Omwenga"
                                 class="rounded-full w-[150px] h-[150px] object-fit">
                         </div>
                         <div class="text-center font-semibold text-2xl"> Levin Omwenga</div>
@@ -421,7 +333,7 @@
     
                     <div class="dev2 bg-blue-300/90 rounded pb-8 rounded-md md:w-3/6 h-7/8">
                         <div class="flex justify-center items-center pt-2">
-                            <img src="Assets/Movie3.jpg" alt="A photo of Rhema Mutethia"
+                            <img src="{{ url_for('static', filename='images/Assets/Movie3.jpg') }}" alt="A photo of Rhema Mutethia"
                                 class="rounded-full w-[150px] h-[150px] object-cover">
                         </div>
                         <div>
@@ -509,7 +421,7 @@
         
 
     </script>
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', filename='js/frontend/script.js') }}"></script>
 
 </body>
 

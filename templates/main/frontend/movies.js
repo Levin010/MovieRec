@@ -1,7 +1,12 @@
 const API_KEY = config.access_token
+<<<<<<< HEAD:frontend/movies.js
+=======
+const BASE_URL = "https://api.themoviedb.org/3";
+
+
+>>>>>>> main:templates/main/frontend/movies.js
 
 document.addEventListener("DOMContentLoaded", () => {
-    const BASE_URL = "https://api.themoviedb.org/3";
     const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500"; 
 
     async function fetchMovies(endpoint) {
@@ -56,9 +61,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+
 document.addEventListener("DOMContentLoaded", () => {
 
-    const BASE_URL = "https://api.themoviedb.org/3";
     const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w1280"; // High-quality background images
 
     async function fetchTrendingMovie() {
@@ -85,3 +90,5 @@ document.addEventListener("DOMContentLoaded", () => {
     updateHeroBanner();
 });
 
+
+ 
