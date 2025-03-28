@@ -56,14 +56,14 @@ h1 {
   margin: 0.5em 0 1em;
   font-size: 26px;
   line-height: 1.2;
-  color: var(--almost-black);
+  color: #F3F4F6;
 }
 
 h2 {
   margin: 0.5em 0 1em;
   font-size: 20px;
   line-height: 1.2;
-  color: var(--grey-dark);
+  color: #F3F4F6;
 }
 
 p {
@@ -85,7 +85,7 @@ p {
   width: 460px;
   box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
   border-radius: 5px;
-  background: var(--white);
+  background: #4B5563;
 }
 
 @media only screen and (max-width: 520px) {
@@ -114,10 +114,11 @@ form.loading {
 
 label {
   margin: 0 0 2px 2px;
+  text-align: left;
   font-size: 14px;
   line-height: 24px;
   letter-spacing: 1px;
-  color: var(--grey-medium);
+  color: #D1D5DB;
   display: block;
 }
 
@@ -172,7 +173,7 @@ label {
   border: none;
   cursor: pointer;
   font-size: 14px;
-  color: #007bff;
+  color: #16A34A;
   font-weight: bold;
 }
 
@@ -185,13 +186,13 @@ label {
   text-align: right; 
   margin-top: 10px; 
   font-size: 20px; 
-  color: #007bff; 
+  color: #16A34A; 
   text-decoration: none; 
   transition: color 0.3s ease-in-out; 
 }
 
 .forgot-password:hover {
-  color: #0056b3; 
+  color: #0284C7; 
   text-decoration: underline; 
 }
 
@@ -200,13 +201,13 @@ label {
   text-align: left; 
   margin-top: 10px; 
   font-size: 20px; 
-  color: #007bff; 
+  color: #16A34A; 
   text-decoration: none; 
   transition: color 0.3s ease-in-out; 
 }
 
 .back-to-login:hover {
-  color: #0056b3; 
+  color: #15803D; 
   text-decoration: underline; 
 }
 
@@ -226,12 +227,12 @@ label {
   outline: none;
   cursor: pointer;
   display: inline-block;
-  background: var(--primary);
+  background: #16A34A;
   transition: color .15s ease, background-color .15s ease;
 }
 
 .btn:hover {
-  background: var(--primary-dark);
+  background: #15803D;
 }
 
 .btn--secondary {
